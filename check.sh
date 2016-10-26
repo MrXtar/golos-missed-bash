@@ -14,6 +14,7 @@ FEE="3.000 GOLOS" # account_creation_fee
 BLOCKSIZE=65536 # maximum_block_size
 RATE=1000 # sbd_interest_rate
 
+
 function is_locked {
 	LOCKED=`curl -s --data-binary '{"id":"1","method":"is_locked","params":[""]}' "$WALLET" | jq -r '.result'`
 }
@@ -49,6 +50,10 @@ else
 		exit
 	fi
 fi
+
+# cd to current dir
+parent_path=$( cd "$(dirname "${BASH_SOURCE}")" ; pwd -P )
+cd "$parent_path"
 
 # preparing files
 if [ -f ${NICKNAME}_data_old.json ]; then
